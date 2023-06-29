@@ -1,7 +1,7 @@
 ## Bank Cutomer Churn Prediction
  ### Introduction
 
-We aim to accomplist the following for this study:
+The aim is to accomplist the following for this study:
 
     Identify and visualize which factors contribute to customer churn:
 
