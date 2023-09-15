@@ -1,16 +1,34 @@
 import streamlit as st
-import time
+import streamlit.components.v1 as components
 
-'Starting a long computation...'
 
-# Add a placeholder
-latest_iteration = st.empty()
-bar = st.progress(0)
+components.html(
+    """
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>
+                
+            </style>
+        </head>
+        <body>
+            <!-- Navbar HTML -->
+            <div class="navbar">
+                <a href="#" class="logo">My Website</a>
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Portfolio</a>
+                <a href="#">Contact</a>
+            </div>
 
-for i in range(100):
-  # Update the progress bar with each iteration.
-  latest_iteration.text(f'Iteration {i+1}')
-  bar.progress(i + 1)
-  time.sleep(0.1)
+            <!-- Content goes here -->
 
-'...and now we\'re done!'
+        </body>
+        </html>
+
+    """,
+    
+)
