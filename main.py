@@ -1,12 +1,3 @@
-"""![](https://cdn.analyticsvidhya.com/wp-content/uploads/2020/05/Churn-Prediction-scaled.jpg)
-
-#### This dataset ranks people by churn or not churn, our goal here is to predict which customers will churn.
-
-#### Our database has 10000 values ​​and 18 columns, Here we will use the "Customer-Churn-Records.csv" database that has been made available for use, below you will see an analysis of the data, the processing of this data and the use of the learning classification of machine models to achieve our goal.
-
-#### Importing Libraries.
-"""
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -21,10 +12,6 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.preprocessing import LabelEncoder
 
-"""## <font color='blue'> 1. Importing Dataset. </font>
-
-#### Here we are reading the database using the name "df" in the variable.
-"""
 
 df = pd.read_csv('./data/raw/Customer-Churn-Records.csv', sep = ',')
 
