@@ -57,6 +57,7 @@ df = pd.concat([df, hot], axis = 1)
 df = df.drop(['Geography', 'Gender', 'Card Type'], axis = 1)
 
 attrib = df.columns
+attrib
 """#### Separating into features variables and target variable."""
 
 X = df.drop('Exited', axis = 1)
