@@ -1,5 +1,3 @@
-venv/
-app/app/settings*
-.idea/
-.idea/
-idea/
+.vscode/*
+.idea/*
+venv/*
