@@ -12,9 +12,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.preprocessing import LabelEncoder
 
-
-df = pd.read_csv('./data/raw/Customer-Churn-Records.csv', sep = ',')
-
+df = pd.read_csv('./data/raw/Customer-Churn-Records.csv')
 """#### Here we can see that we have categorical and continuous variables, we can also see that we don't have null values.
 
 - RowNumber: corresponds to the record (row) number and has no effect on the output.
@@ -37,8 +35,6 @@ df = pd.read_csv('./data/raw/Customer-Churn-Records.csv', sep = ',')
 - Points Earned: the points earned by the customer for using credit card.
 """
 
-df = df.drop('Complain', axis = 1)
-
 """#### Categorical Variables.
 
 #### Looking at our categorical variables we can see that most of our variables are well distributed, we can see that our customers are mostly from France, with the gender variable well distributed, and usually with 1 or 2 products, a very important thing is that we see that our target variable is not well distributed, we will probably have to balance the class.
@@ -60,6 +56,7 @@ hot = pd.get_dummies(df[['Geography', 'Gender', 'Card Type']])
 df = pd.concat([df, hot], axis = 1)
 df = df.drop(['Geography', 'Gender', 'Card Type'], axis = 1)
 
+attrib = df.columns
 """#### Separating into features variables and target variable."""
 
 X = df.drop('Exited', axis = 1)
