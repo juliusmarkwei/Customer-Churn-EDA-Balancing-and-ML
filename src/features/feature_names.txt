@@ -1,0 +1,20 @@
+CreditScore
+Age
+Tenure
+Balance
+NumOfProducts
+HasCrCard
+IsActiveMember
+EstimatedSalary
+Exited
+Satisfaction Score
+Point Earned
+Geography_France
+Geography_Germany
+Geography_Spain
+Gender_Female
+Gender_Male
+Card Type_DIAMOND
+Card Type_GOLD
+Card Type_PLATINUM
+Card Type_SILVER
