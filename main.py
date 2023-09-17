@@ -16,20 +16,6 @@ def load_data():
     data = open(path_2, 'rb')
     scaler = pickle.load(data) 
     return model, scaler
-
-
-def get_feature_names():
-    list_of_features = []
-    target = None
-    with open('./src/features/feature_names.txt', 'r') as f:
-        for line in f:
-            list_of_features.append(line.strip())
-
-    # getting the name of the target name 'Exited'
-    if 'Exited' in list_of_features:
-        target = list_of_features.pop(list_of_features.index('Exited'))
-    predictor = list_of_features
-    return (predictor, target)
    
    
 Geography = ('France','Spain', 'Germany')
@@ -37,6 +23,7 @@ Gender = ('Male', 'Female')
 Card_Type = ('DIAMOND', 'GOLD', 'PLATINUM', 'SILVER')
 HasCrCard = ('Yes', 'No')
 IsActiveMember = ('Yes', 'No')
+Complain = ('Yes', 'No')
 
 
 def predict_page():
@@ -50,11 +37,12 @@ def predict_page():
     hasCreditCard = st.radio('Do you have a credit card?', HasCrCard)
     isActiveMember = st.radio('Are you an active member?',IsActiveMember)
     estimatedSalary = st.number_input('What is your take home salary?', 100)
+    complain = st.radio('Have ever made complained to the bank\'s customer service before?', Complain)
     satisfactionScore = st.slider('Select a satisfaction score', 1, 5, 3)
     pointEarned = st.slider('What is your point earned with the bank?', 100, 1000, 300)
-    geography = st.selectbox('Select your geographical area', Geography)
-    gender = st.radio('What is your gender?', Gender)
-    cardType = st.selectbox('Select your credit card type', Card_Type)
+    geography_any = st.selectbox('Select your geographical area', Geography)
+    gender_any = st.radio('What is your gender?', Gender)
+    cardType_any = st.selectbox('Select your credit card type', Card_Type)
     
     # converting input to desired format
     #Has Credit Card
@@ -70,58 +58,85 @@ def predict_page():
             isActiveMember = 1
         elif item == isActiveMember:
             isActiveMember = 0
+            
+    #customer complains
+    for item in Complain:
+        if item == complain:
+            complain = 1
+        elif item == complain:
+            complain = 0
+        
     
     #Geographical of the user
-    for item in Geography:
-        if item == geography:
-            geography = 1
-        elif item == geography:
-            geography = 2
-        elif item == geography:
-            geography = 3
+    Geography_France, Geography_Germany, Geography_Spain = None, None, None
+    if geography_any == 'France':
+        Geography_France = 1
+        Geography_Germany = 0
+        Geography_Spain = 0
+    elif geography_any == 'Germany':
+        Geography_France = 0
+        Geography_Germany = 1
+        Geography_Spain = 0
+    else:
+        Geography_France = 0
+        Geography_Germany = 0
+        Geography_Spain = 1
         
     #Gender of the user
-    for item in Gender:
-        if item == gender:
-            gender = 1
-        elif item == gender:
-            gender = 0
+    Gender_Female, Gender_Male = None, None
+    if gender_any == 'Female':
+        Gender_Female = 1
+        Gender_Male = 0
+    else:
+        Gender_Female = 0
+        Gender_Male = 1
         
     #Card type of the user
-    for item in Card_Type:
-        if item == cardType:
-            cardType = 1
-        elif item == cardType:
-            cardType = 0
+    Card_Type_DIAMOND, Card_Type_GOLD, Card_Type_PLATINUM, Card_Type_SILVER = None, None, None, None
+    if cardType_any == 'DIAMOND':
+        Card_Type_DIAMOND = 1
+        Card_Type_GOLD = 0
+        Card_Type_PLATINUM = 0
+        Card_Type_SILVER = 0
+    elif cardType_any == 'GOLD':
+        Card_Type_DIAMOND = 0
+        Card_Type_GOLD = 1
+        Card_Type_PLATINUM = 0
+        Card_Type_SILVER = 0
+    elif cardType_any == 'PLATINUM':
+        Card_Type_DIAMOND = 0
+        Card_Type_GOLD = 0
+        Card_Type_PLATINUM = 1
+        Card_Type_SILVER = 0
+    else:
+        Card_Type_DIAMOND = 0
+        Card_Type_GOLD = 0
+        Card_Type_PLATINUM = 0
+        Card_Type_SILVER = 1
     
     st.divider()
     button_pressed = st.button('Predict!', help='Click to make prediction')
     
     if button_pressed:
-        predictor = np.array([
-            creditscore,
-            age,
-            tenure,
-            balance,
-            NOP,
-            hasCreditCard,
-            isActiveMember,
-            estimatedSalary,
-            satisfactionScore,
-            pointEarned,
-            geography,
-            gender,
-            cardType
-        ])
+        predictor = np.array([[
+            creditscore, age, tenure, balance, NOP, hasCreditCard, isActiveMember, estimatedSalary,\
+                satisfactionScore, pointEarned, Geography_France, Geography_Germany, Geography_Spain,\
+                    Gender_Female, Gender_Male,Card_Type_DIAMOND, Card_Type_GOLD, Card_Type_PLATINUM, Card_Type_SILVER
+        ]])
         
+        # loading model and scler for cleannig the inputs
         model, scaler = load_data()     
         
-        
-        print('Almost done')
-        # preprocess received data
+                # preprocess received data
         scaled_data = scaler.transform(predictor)
         result = model.predict(scaled_data)
         
+        # if a successful prediction
         
-        st.subheader(result)
+        if result[0] == 1:
+            message = 'Customer successfully churn :thumbsdown:' 
+            st.subheader(message)
+        else:
+            message = 'Customer successfully didn\'t churned :thumbsup:' 
+            st.subheader(message)
         
