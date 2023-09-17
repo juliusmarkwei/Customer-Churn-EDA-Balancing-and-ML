@@ -1,5 +1,6 @@
 import streamlit as st
-import streamlit.components.v1 as components
-from action import predict_page, get_feature_names
+from main import predict_page
 
-predict_page()
+
+if __name__ == '__main__':
+    predict_page()
