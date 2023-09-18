@@ -1,6 +1,26 @@
 import streamlit as st
-from main import predict_page
+from main import predict_page, tab
+from explore import show_explore_page
 
 
-if __name__ == '__main__':
-    predict_page()
+
+def explore():
+    selection = st.sidebar.selectbox(
+        ":Yellow[What do you want to know about my project?]",
+        ("Make predictions", "Explore Data"),
+    )
+    return selection
+
+
+if __name__ == "__main__":
+    ok = explore()
+    st.sidebar.image(
+        "https://cdn.analyticsvidhya.com/wp-content/uploads/2020/05/Churn-Prediction-scaled.jpg"
+    )
+
+    if ok == "Make predictions":
+        predict_page()
+    else:
+        show_explore_page()
+
+tab()
