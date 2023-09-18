@@ -7,73 +7,76 @@ import bz2
 
 def load_data():
     # loading and decompressing model
-    path_1 = './models/random_forest.pbz2'
-    data = bz2.BZ2File(path_1, 'rb')
-    model = pickle.load(data) 
+    path_1 = "./models/random_forest.pbz2"
+    data = bz2.BZ2File(path_1, "rb")
+    model = pickle.load(data)
 
     # load scaler data
-    path_2 = './src/helpers/scaler.pkl'
-    data = open(path_2, 'rb')
-    scaler = pickle.load(data) 
+    path_2 = "./src/helpers/scaler.pkl"
+    data = open(path_2, "rb")
+    scaler = pickle.load(data)
     return model, scaler
-   
-   
-Geography = ('France','Spain', 'Germany')
-Gender = ('Male', 'Female')
-Card_Type = ('DIAMOND', 'GOLD', 'PLATINUM', 'SILVER')
-HasCrCard = ('Yes', 'No')
-IsActiveMember = ('Yes', 'No')
-Complain = ('Yes', 'No')
+
+
+Geography = ("France", "Spain", "Germany")
+Gender = ("Male", "Female")
+Card_Type = ("DIAMOND", "GOLD", "PLATINUM", "SILVER")
+HasCrCard = ("Yes", "No")
+IsActiveMember = ("Yes", "No")
+Complain = ("Yes", "No")
 
 
 def predict_page():
-    st.title('Bank Customer Churn Predicton')
+    st.title("Bank Customer Churn Predicton")
     st.write("""##### Fill in the following requirement to make some predictions.""")
-    creditscore = st.number_input('Enter credit score')
-    age = st.number_input('Enter age', 15, 200)
-    tenure = int(st.slider('How long have you been with the bank?', 1, 10, 2))
-    balance = st.number_input('What is your current balance?')
-    NOP = int(st.slider('What is the number of products you have purchase from the bank?'))
-    hasCreditCard = st.radio('Do you have a credit card?', HasCrCard)
-    isActiveMember = st.radio('Are you an active member?',IsActiveMember)
-    estimatedSalary = st.number_input('What is your take home salary?', 100)
-    complain = st.radio('Have ever made complained to the bank\'s customer service before?', Complain)
-    satisfactionScore = st.slider('Select a satisfaction score', 1, 5, 3)
-    pointEarned = st.slider('What is your point earned with the bank?', 100, 1000, 300)
-    geography_any = st.selectbox('Select your geographical area', Geography)
-    gender_any = st.radio('What is your gender?', Gender)
-    cardType_any = st.selectbox('Select your credit card type', Card_Type)
-    
+    creditscore = st.number_input("Enter credit score")
+    age = st.number_input("Enter age", 15, 200)
+    tenure = int(st.slider("How long have you been with the bank?", 1, 10, 2))
+    balance = st.number_input("What is your current balance?")
+    NOP = int(
+        st.slider("What is the number of products you have purchase from the bank?")
+    )
+    hasCreditCard = st.radio("Do you have a credit card?", HasCrCard)
+    isActiveMember = st.radio("Are you an active member?", IsActiveMember)
+    estimatedSalary = st.number_input("What is your take home salary?", 100)
+    complain = st.radio(
+        "Have ever made complained to the bank's customer service before?", Complain
+    )
+    satisfactionScore = st.slider("Select a satisfaction score", 1, 5, 3)
+    pointEarned = st.slider("What is your point earned with the bank?", 100, 1000, 300)
+    geography_any = st.selectbox("Select your geographical area", Geography)
+    gender_any = st.radio("What is your gender?", Gender)
+    cardType_any = st.selectbox("Select your credit card type", Card_Type)
+
     # converting input to desired format
-    #Has Credit Card
+    # Has Credit Card
     for item in HasCrCard:
         if item == hasCreditCard:
             hasCreditCard = 1
         elif item == hasCreditCard:
             hasCreditCard = 0
-        
-    #Is active member
+
+    # Is active member
     for item in IsActiveMember:
         if item == isActiveMember:
             isActiveMember = 1
         elif item == isActiveMember:
             isActiveMember = 0
-            
-    #customer complains
+
+    # customer complains
     for item in Complain:
         if item == complain:
             complain = 1
         elif item == complain:
             complain = 0
-        
-    
-    #Geographical of the user
+
+    # Geographical of the user
     Geography_France, Geography_Germany, Geography_Spain = None, None, None
-    if geography_any == 'France':
+    if geography_any == "France":
         Geography_France = 1
         Geography_Germany = 0
         Geography_Spain = 0
-    elif geography_any == 'Germany':
+    elif geography_any == "Germany":
         Geography_France = 0
         Geography_Germany = 1
         Geography_Spain = 0
@@ -81,29 +84,34 @@ def predict_page():
         Geography_France = 0
         Geography_Germany = 0
         Geography_Spain = 1
-        
-    #Gender of the user
+
+    # Gender of the user
     Gender_Female, Gender_Male = None, None
-    if gender_any == 'Female':
+    if gender_any == "Female":
         Gender_Female = 1
         Gender_Male = 0
     else:
         Gender_Female = 0
         Gender_Male = 1
-        
-    #Card type of the user
-    Card_Type_DIAMOND, Card_Type_GOLD, Card_Type_PLATINUM, Card_Type_SILVER = None, None, None, None
-    if cardType_any == 'DIAMOND':
+
+    # Card type of the user
+    Card_Type_DIAMOND, Card_Type_GOLD, Card_Type_PLATINUM, Card_Type_SILVER = (
+        None,
+        None,
+        None,
+        None,
+    )
+    if cardType_any == "DIAMOND":
         Card_Type_DIAMOND = 1
         Card_Type_GOLD = 0
         Card_Type_PLATINUM = 0
         Card_Type_SILVER = 0
-    elif cardType_any == 'GOLD':
+    elif cardType_any == "GOLD":
         Card_Type_DIAMOND = 0
         Card_Type_GOLD = 1
         Card_Type_PLATINUM = 0
         Card_Type_SILVER = 0
-    elif cardType_any == 'PLATINUM':
+    elif cardType_any == "PLATINUM":
         Card_Type_DIAMOND = 0
         Card_Type_GOLD = 0
         Card_Type_PLATINUM = 1
@@ -113,30 +121,71 @@ def predict_page():
         Card_Type_GOLD = 0
         Card_Type_PLATINUM = 0
         Card_Type_SILVER = 1
-    
+
     st.divider()
-    button_pressed = st.button('Predict!', help='Click to make prediction')
-    
+    button_pressed = st.button("Predict!", help="Click to make prediction")
+
     if button_pressed:
-        predictor = np.array([[
-            creditscore, age, tenure, balance, NOP, hasCreditCard, isActiveMember, estimatedSalary,\
-                satisfactionScore, pointEarned, Geography_France, Geography_Germany, Geography_Spain,\
-                    Gender_Female, Gender_Male,Card_Type_DIAMOND, Card_Type_GOLD, Card_Type_PLATINUM, Card_Type_SILVER
-        ]])
-        
+        predictor = np.array(
+            [
+                [
+                    creditscore,
+                    age,
+                    tenure,
+                    balance,
+                    NOP,
+                    hasCreditCard,
+                    isActiveMember,
+                    estimatedSalary,
+                    satisfactionScore,
+                    pointEarned,
+                    Geography_France,
+                    Geography_Germany,
+                    Geography_Spain,
+                    Gender_Female,
+                    Gender_Male,
+                    Card_Type_DIAMOND,
+                    Card_Type_GOLD,
+                    Card_Type_PLATINUM,
+                    Card_Type_SILVER,
+                ]
+            ]
+        )
+
         # loading model and scler for cleannig the inputs
-        model, scaler = load_data()     
-        
-                # preprocess received data
+        model, scaler = load_data()
+
+        # preprocess received data
         scaled_data = scaler.transform(predictor)
         result = model.predict(scaled_data)
-        
+
         # if a successful prediction
-        
+
         if result[0] == 1:
-            message = 'Customer successfully churn :thumbsdown:' 
+            message = "Customer successfully churn :thumbsdown:"
             st.subheader(message)
         else:
-            message = 'Customer successfully didn\'t churned :thumbsup:' 
+            message = "Customer successfully didn't churned :thumbsup:"
             st.subheader(message)
-        
+
+
+def tab():
+    st.sidebar._html(
+        """
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <img class="nav-link active" aria-current="page" href="#" src="">
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+        """
+    )
+  
