@@ -173,7 +173,7 @@ def tab():
     st.sidebar._html(
         """
             <div>
-                <img src="./assets/images/GitHub.png" alt="Github image" />
+                <img src="./assets/images/GitHub.png" alt="Github image"/>
             </div>
         """
     )
