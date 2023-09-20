@@ -64,7 +64,7 @@ def show_explore_page():
         go.Bar(
             x=credit_card_exit_counts["Card Type"],
             y=credit_card_exit_counts[1],
-            name="Exited",
+            name="Customer Left",
             marker_color=cool_colors[0],
         )
     )
@@ -73,14 +73,14 @@ def show_explore_page():
         go.Bar(
             x=credit_card_exit_counts["Card Type"],
             y=credit_card_exit_counts[0],
-            name="Not Exited",
+            name="Customer Stayed",
             marker_color=cool_colors[1],
         )
     )
 
     # Set plot title and axis labels
     fig.update_layout(
-        title="Card Type Exit Counts (Stacked)".center(180),
+        title="Customer Churn Status based on their Card Type".center(150),
         xaxis_title="Card Type",
         yaxis_title="Count",
         barmode="stack",  # To create stacked bars
@@ -89,23 +89,49 @@ def show_explore_page():
     # Display the plot using Streamlit
     st.plotly_chart(fig)
 
-    # Create a pie chart using Plotly Express
-    age_data = dict(df["Age"].value_counts())
+    # Define age category bins and labels
+    # Define age category bins and labels
+    age_bins = [0, 30, 40, 50, float("inf")]
+    age_labels = ["Under 30", "30-40", "40-50", "Over 50"]
+
+    # Create a new column in the DataFrame with age categories
+    df["Age Category"] = pd.cut(df["Age"], bins=age_bins, labels=age_labels)
+
+    # Count the occurrences of each age category
+    age_category_counts = df["Age Category"].value_counts().reset_index()
+
+    # Rename the columns for clarity
+    age_category_counts.columns = ["Age Category", "Count"]
+
+    # Create a custom color palette
+    colors = ["#3EB8C1", "#C1A33E", "#C1473E", "#53E31C"]
+
+    # Create a Pie Chart using Plotly Express with custom styling
     fig = px.pie(
-        df,
-        values=age_data.values(),
-        names=age_data.keys(),
-        title="Age Distribution of the Customers Bases on the Data used".center(150),
-        width=600,  # Set the width (adjust as needed)
-        height=600,
-        hole=0.6,
+        age_category_counts,
+        values="Count",
+        names="Age Category",
+        title="Age Category Distribution",
+        color_discrete_sequence=colors,  # Set custom colors
     )
 
-    # Make the pie chart interactive
+    # Add labels inside the pie chart
     fig.update_traces(
-        hoverinfo="label+percent",  # Show label and percentage on hover
-        pull=[0.1, 0, 0, 0, 0.1],  # Pull two slices for emphasis (adjust as needed)
+        textinfo="percent+label",
+        textfont_size=14,
     )
 
-    # Display the plot using Streamlit
+    # Customize the layout and appearance
+    fig.update_layout(
+        legend=dict(
+            x=0.85,
+            y=0.5,  # Adjust the legend position
+            bgcolor="rgba(255, 255, 255, 0.7)",
+            bordercolor="gray",
+            borderwidth=1,
+        ),
+        margin=dict(l=0, r=0, b=0, t=30),  # Adjust the chart margins
+    )
+
+    # Display the styled Pie Chart using Streamlit
     st.plotly_chart(fig)
