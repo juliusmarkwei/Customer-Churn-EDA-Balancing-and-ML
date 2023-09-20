@@ -172,20 +172,8 @@ def predict_page():
 def tab():
     st.sidebar._html(
         """
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <img class="nav-link active" aria-current="page" href="#" src="">
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                </li>
-            </ul>
+            <div>
+                <img src="./assets/images/GitHub.png" alt="Github image" />
+            </div>
         """
     )
-  
