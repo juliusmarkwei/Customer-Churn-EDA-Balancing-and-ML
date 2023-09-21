@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import plotly.graph_objects as go
 import plotly.express as px
 
@@ -89,7 +88,7 @@ def show_explore_page():
     # Display the plot using Streamlit
     st.plotly_chart(fig)
 
-    # Define age category bins and labels
+
     # Define age category bins and labels
     age_bins = [0, 30, 40, 50, float("inf")]
     age_labels = ["Under 30", "30-40", "40-50", "Over 50"]
@@ -111,14 +110,16 @@ def show_explore_page():
         age_category_counts,
         values="Count",
         names="Age Category",
-        title="Age Category Distribution",
+        title="Age Category Distribution According to Catogories".center(160),
         color_discrete_sequence=colors,  # Set custom colors
+        hole=0.5,
     )
 
     # Add labels inside the pie chart
     fig.update_traces(
         textinfo="percent+label",
         textfont_size=14,
+        pull=[0.08, 0.08, 0.08, 0.08]
     )
 
     # Customize the layout and appearance
