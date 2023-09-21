@@ -27,7 +27,7 @@ Complain = ("Yes", "No")
 
 
 def predict_page():
-    st.title("Bank Customer Churn Predicton")
+    st.title("Bank Customer Churn Predicton :bank:")
     st.write("""##### Fill in the following requirement to make some predictions.""")
     creditscore = st.number_input("Enter credit score")
     age = st.number_input("Enter age", 15, 200)
@@ -170,10 +170,9 @@ def predict_page():
 
 
 def tab():
-    st.sidebar._html(
-        """
-            <div>
-                <img src="./assets/images/GitHub.png" alt="Github image"/>
-            </div>
-        """
+    st.sidebar.image("./assets/images/github.jpeg", width=50)
+
+    # Create a link to the GitHub repository
+    st.sidebar.markdown(
+        f"Check out this [GitHub repository](https://github.com/juliusmarkwei/Customer-Churn-EDA-Balancing-and-ML)"
     )
