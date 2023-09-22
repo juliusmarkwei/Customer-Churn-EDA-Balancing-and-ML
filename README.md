@@ -68,22 +68,39 @@ Carefully type the command below in your teminal of the "Customer-Churn-EDA-Bala
 streamlit run app.py
 ```
 
+
 ## Model Training
 
-Explain how the machine learning model was trained, including data preprocessing, model selection, and evaluation metrics.
+Our machine learning model was trained using a dataset containing [describe your dataset]. The training process involved the following steps:
 
+- **Data Preprocessing:** We performed data cleaning, handled missing values, and encoded categorical features as part of data preparation.
+
+- **Feature Engineering:** [Describe any feature engineering steps, if applicable.]
+
+- **Model Selection:** We selected the Random Forest model for the prediciton app after evaluation as the base model due to its suitability for our problem.
+
+- **Model Evaluation:** The model's performance was evaluated using metrics accuracy and F1-score. Cross-validation was used to assess its generalization ability.
+
+- **Hyperparameter Tuning:** We fine-tuned the model's hyperparameters to optimize performance.
+
+For detailed information on the model training process, please refer to the [training notebook](https://github.com/juliusmarkwei/Customer-Churn-EDA-Balancing-and-ML/notebooks/main.ipynb).
+
+---
 ## Visualization
 
 Discuss the visualization page and the types of charts or visualizations included. Provide examples of how to generate these visualizations.
 
 ## Contributing
 
-Explain how others can contribute to your project. Include guidelines for reporting issues, making pull requests, and any coding standards.
+We welcome contributions to improve this project! Whether it's bug reports, feature suggestions, or code contributions, we appreciate your help.
 
+- **Reporting Issues:** If you encounter a problem or have a suggestion, [open an issue](https://github.com/juliusmarkwei/Customer-Churn-EDA-Balancing-and-ML/issues) with details.
+
+- **Making Pull Requests:** Feel free to submit pull requests for fixes or enhancements. Follow common coding standards and provide clear descriptions for your changes.
+
+Thank you for your contributions!
+
+---
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-Acknowledge any libraries, datasets, or resources that you used or were inspired by in your project.
