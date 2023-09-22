@@ -10,7 +10,6 @@ This project is a machine learning classifier for predicting whether a bank cust
 - [Getting Started](#getting-started)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Streamlit App](#streamlit-app)
 - [Model Training](#model-training)
 - [Visualization](#visualization)
@@ -42,47 +41,28 @@ Here are some pictures of what the app looks like:
 List the prerequisites that users need to have installed or set up before using the project.
 
 ```bash
-# Example:
-# Python and pip
-Python 3.8
-pip install -r requirements.txt
+python>=3.8
+requirements.txt
 ```
 
 ### Installation
 
-Provide step-by-step instructions on how to install and run your project. Include any configuration files or environment variables that need to be set.
+To use my application, follow this steps below to successfully install and run the program.
 
 ```bash
 # Clone the repository
 git clone https://github.com/juliusmarkwei/Customer-Churn-EDA-Balancing-and-ML.git
 
 # Change directory
-cd Customer-Churn-EDA-Balancing-and-ML
+cd Customer-Churn-EDA-Balancing-and-ML/
 
 # Install dependencies
 pip install -r requirements.txt
 ```
 
-## Usage
-
-Explain how to use your machine learning classifier. Include code snippets or examples if applicable.
-
-```python
-# Example usage:
-from churn_classifier import ChurnClassifier
-
-# Load the model
-model = ChurnClassifier.load_model('model.pkl')
-
-# Make predictions
-customer_data = [...]  # Replace with customer data
-prediction = model.predict(customer_data)
-```
-
 ## Streamlit App
 
-Describe the features and functionality of your Streamlit app. Provide instructions on how users can run the app locally.
-
+Carefully type the command below in your teminal of the "Customer-Churn-EDA-Balancing-and-ML/" directory to run the app.
 ```bash
 # Run the Streamlit app
 streamlit run app.py
