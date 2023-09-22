@@ -8,14 +8,12 @@ This project is a machine learning classifier for predicting whether a bank cust
 
 - [Demo](#demo)
 - [Getting Started](#getting-started)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
 - [Streamlit App](#streamlit-app)
 - [Model Training](#model-training)
-- [Visualization](#visualization)
 - [Contributing](#contributing)
 - [License](#license)
-- [Acknowledgments](#acknowledgments)
 
 ## Demo
 
