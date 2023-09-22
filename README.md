@@ -75,8 +75,6 @@ Our machine learning model was trained using a dataset containing [describe your
 
 - **Data Preprocessing:** We performed data cleaning, handled missing values, and encoded categorical features as part of data preparation.
 
-- **Feature Engineering:** [Describe any feature engineering steps, if applicable.]
-
 - **Model Selection:** We selected the Random Forest model for the prediciton app after evaluation as the base model due to its suitability for our problem.
 
 - **Model Evaluation:** The model's performance was evaluated using metrics accuracy and F1-score. Cross-validation was used to assess its generalization ability.
@@ -85,10 +83,6 @@ Our machine learning model was trained using a dataset containing [describe your
 
 For detailed information on the model training process, please refer to the [training notebook](https://github.com/juliusmarkwei/Customer-Churn-EDA-Balancing-and-ML/notebooks/main.ipynb).
 
----
-## Visualization
-
-Discuss the visualization page and the types of charts or visualizations included. Provide examples of how to generate these visualizations.
 
 ## Contributing
 
